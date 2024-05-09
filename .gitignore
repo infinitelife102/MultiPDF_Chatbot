@@ -327,6 +327,24 @@ paket-files/
 __pycache__/
 *.pyc
 
+# --- Python / Streamlit / LangChain (project-specific) ---
+.venv/
+venv/
+.env
+.env.*
+
+# Streamlit cache/config
+.streamlit/
+
+# Jupyter / Python tooling
+.ipynb_checkpoints/
+
+# FAISS local index artifacts (generated at runtime)
+faiss_index/
+
+# macOS
+.DS_Store
+
 # Cake - Uncomment if you are using it
 # tools/**
 # !tools/packages.config

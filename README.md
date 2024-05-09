@@ -1,13 +1,9 @@
 # Multi-PDF-s 📚ChatApp AI Agent 🤖
 
-Meet MultiPDF Chat AI App! 🚀 Chat seamlessly with Multiple PDFs using Langchain, Google Gemini Pro &amp; FAISS Vector DB with Seamless Streamlit Deployment. Get instant, Accurate responses from Awesome Google Gemini OpenSource language Model. 📚💬 Transform your PDF experience now! 🔥✨
+Meet MultiPDF Chat AI App! 🚀 Chat seamlessly with Multiple PDFs using LangChain, a local Ollama LLM (`llama3.1:8b`) &amp; FAISS Vector DB with seamless Streamlit deployment. Get instant, accurate responses from a privacy‑friendly local language model. 📚💬 Transform your PDF experience now! 🔥✨
 
 ## 📝 Description
 The Multi-PDF's Chat Agent is a Streamlit-based web application designed to facilitate interactive conversations with a chatbot. The app allows users to upload multiple PDF documents, extract text information from them, and train a chatbot using this extracted content. Users can then engage in real-time conversations with the chatbot.
-
-## 📢Demo App with Streamlit Cloud (Visualize only)
-
-[Launch App On Streamlit](https://multi-pdfschatappai-agent.streamlit.app/)
 
 ## 💻 Demo:
 ![Demo 1: Chatbot Output](img/LLMframework.jpg)
@@ -48,34 +44,59 @@ The application follows these steps to provide responses to your questions:
 
 ## 🌟Requirements
 
-- **Streamlit** : A Python library for building web applications with interactive elements.
-- **google-generativeai** : It is a package that provides generative AI capabilities for chatbots and virtual agents. It can be used in a variety of applications such as content generation, dialogue agents, summarization and classification systems and more.
-- **python-dotenv** : A library for loading environment variables from a `.env` file. This is commonly used to store configuration settings, API keys, and other sensitive information outside of your code.
-- **langchain** : A custom library for natural language processing tasks, including conversational retrieval, text splitting, embeddings, vector stores, chat models, and memory.
-- **PyPDF2** : PyPDF2 is a library for reading and manipulating PDF files in Python. It can be used to merge, split, and modify PDFs. In the context of a multipdf chatbot, PyPDF2 could be used to handle the manipulation and generation of PDF files based on user input or responses.
-- **faiss-cpu** : FAISS (Facebook AI Similarity Search) is a library developed by Facebook for efficient similarity search, Machine Learning Embeddings,Information Retrieval, content-based filtering and clustering of dense vectors.
-- **langchain_google_genai** : It is a package that provides an integration between LangChain and Google’s generative-ai SDK. It contains classes that extend the Embeddings class and provide methods for generating embeddings. The package can be used in a multipdf chatbot application to extract textual data from PDF documents and generate Accurate responses to user queries.
+- **Python 3.9+** : Tested with recent Python 3.x versions.
+- **Streamlit** : Web UI framework for building interactive apps.
+- **LangChain** : For text splitting, RAG, vector stores, and LLM orchestration.
+- **langchain‑community** : Community integrations, including `ChatOllama` and `OllamaEmbeddings`.
+- **langchain‑text‑splitters** : Provides `RecursiveCharacterTextSplitter` used for chunking PDF text.
+- **PyPDF2** : To extract text content from PDF files.
+- **faiss‑cpu** : Vector database for efficient similarity search over PDF chunks.
+- **Ollama** (desktop/server) : Local LLM runtime; this project uses the `llama3.1:8b` model via Ollama.
 
 ![Demo 4: Chatbot Output](img/CALMOutput.jpg)
 ---
 
 ## ▶️Installation
 
-Clone the repository:
+### 1. Create and activate a virtual environment (recommended)
 
-`git clone https://github.com/GURPREETKAURJETHRA/Multi-PDFs_ChatApp_AI-Agent.git`
+```bash
+cd Multi-PDFs_ChatApp_AI-Agent
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-Install the required Python packages:
+### 2. Install the required Python packages
 
-`pip install -r requirements.txt`
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
 
-Set up your Google API key from `https://makersuite.google.com/app/apikey` by creating a .env file in the root directory of the project with the following contents:
+### 3. Install and prepare Ollama (local LLM)
 
-`GOOGLE_API_KEY =<your-api-key-here>`
+1. Install Ollama from the official website.
+2. Start the Ollama server:
 
-Run the Streamlit app:
+   ```bash
+   ollama serve
+   ```
 
-`streamlit run app.py`
+3. Download the model used by this app:
+
+   ```bash
+   ollama pull llama3.1:8b
+   ```
+
+> 🔑 **Environment variables / .env**  
+> This version does **not** use the Google Gemini API, so `GOOGLE_API_KEY` and a `.env` file are **not required**.  
+> As long as Ollama is installed and running, the app will work without any additional API keys.
+
+### 4. Run the Streamlit app
+
+```bash
+streamlit run chatapp.py
+```
 
 ---
 ## 💡Usage
@@ -84,10 +105,10 @@ To use the Multi-PDF-s 📚ChatApp AI Agent 🤖, U can have glimpse of look by 
 
 In case You want to run & implement project on your system then follow these steps:
 
-1. Ensure that you have installed the required dependencies and added the **Google API key to the `.env` file** (MUST).
-2. Run the `app.py` file using the Streamlit CLI. Execute the following command:
-   ```
-   streamlit run app.py
+1. Ensure that you have installed the required dependencies via `pip install -r requirements.txt` and that **Ollama is running with the `llama3.1:8b` model pulled**.
+2. Run the `chatapp.py` file using the Streamlit CLI. Execute the following command:
+   ```bash
+   streamlit run chatapp.py
    ```
 3. The application will launch in your default web browser, displaying the user interface.
 4. Upload multiple PDF documents into the app by following the provided instructions at sidebar. On the sidebar, you'll find an option to upload PDF documents. Click on the "Upload your documents here and click on Process" button and select one or more PDF files. 
@@ -100,11 +121,4 @@ The application will use conversational AI to provide responses based on the con
 ---
 ## ©️ License 🪪 
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
----
-
-#### **If you like this LLM Project do drop ⭐ to this repo**
-#### Follow me on [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gurpreetkaurjethra/) &nbsp; [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/GURPREETKAURJETHRA/)
-
----
+This project is distributed under the MIT License. See `LICENSE` for more information.
