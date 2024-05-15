@@ -1,124 +1,93 @@
-# Multi-PDF-s 📚ChatApp AI Agent 🤖
+# MultiPDF_RAG
 
-Meet MultiPDF Chat AI App! 🚀 Chat seamlessly with Multiple PDFs using LangChain, a local Ollama LLM (`llama3.1:8b`) &amp; FAISS Vector DB with seamless Streamlit deployment. Get instant, accurate responses from a privacy‑friendly local language model. 📚💬 Transform your PDF experience now! 🔥✨
+An advanced interactive Web Application that allows users to chat seamlessly with multiple PDF documents using a Retrieval-Augmented Generation (RAG) architecture. Built with Streamlit, LangChain, local Ollama language models, and FAISS vector database. Keep your data private with fully localized document processing and language modeling.
 
-## 📝 Description
-The Multi-PDF's Chat Agent is a Streamlit-based web application designed to facilitate interactive conversations with a chatbot. The app allows users to upload multiple PDF documents, extract text information from them, and train a chatbot using this extracted content. Users can then engage in real-time conversations with the chatbot.
+## Overview
 
-## 💻 Demo:
-![Demo 1: Chatbot Output](img/LLMframework.jpg)
+The MultiPDF_RAG project was engineered to extract knowledge efficiently across a multitude of documents. Users can upload various PDFs, process text through sliding window chunking, and utilize an intelligent chatbot to retrieve accurate, context-aware answers.
 
-## 🎯 How It Works:
-------------
+### Key Components:
+- **Streamlit**: Provides an intuitive, interactive web interface.
+- **LangChain**: Orchestrates LLM processes, text slicing, and QA chains.
+- **Ollama**: Serves as the localized inference engine (defaulting to `llama3.1:8b`).
+- **FAISS**: Ensures high-speed, local similarity search capabilities.
+- **PyPDF2**: Manages text extraction from uploaded PDF files.
 
-![MultiPDF Chat App Diagram](img/Architecture.jpg)
+## Architecture
 
-The application follows these steps to provide responses to your questions:
+The underlying system follows a clear retrieval augmented generation lifecycle:
+1. **Document Ingestion**: Upload multiple PDFs where content is parsed and aggregated.
+2. **Text Chunking**: Content is divided into manageable contexts to bypass LLM character limits.
+3. **Embedding Generation**: Text chunks are converted into vector representations locally.
+4. **Vector Store**: A FAISS index is established for immediate, semantic similarity querying.
+5. **Generation**: Top similar contexts are retrieved from the index and forwarded to the local language model to formulate comprehensive natural language answers.
 
-1. **PDF Loading** : The app reads multiple PDF documents and extracts their text content.
+## Features
 
-2. **Text Chunking** : The extracted text is divided into smaller chunks that can be processed effectively.
+- **Local Privacy**: Document embeddings and language modeling occur locally without API dependency.
+- **Multi-Document Support**: Break the simple single-document context boundary by querying across all ingested literature simultaneously.
+- **Adaptive Vector Search**: Employs scalable chunking overlapping mechanisms for greater precision during RAG.
+- **Framework Compatibility**: Configurable to utilize diverse local language models beyond the default set.
 
-3. **Language Model** : The application utilizes a language model to generate vector representations (embeddings) of the text chunks.
+## Prerequisites
 
-4. **Similarity Matching** : When you ask a question, the app compares it with the text chunks and identifies the most semantically similar ones.
+- Python 3.9+
+- Ollama runtime environment (Server / Desktop)
 
-5. **Response Generation** : The selected chunks are passed to the language model, which generates a response based on the relevant content of the PDFs.
+## Installation Guide
 
-![Demo 2: Chatbot Output](img/LLMApp.jpg)
+### 1. Repository Setup
 
---- 
-## 🎯 Key Features
-
-- **Adaptive Chunking**: Our Sliding Window Chunking technique dynamically adjusts window size and position for RAG, balancing fine-grained and coarse-grained data access based on data complexity and context.
-
-- **Multi-Document Conversational QA**: Supports simple and multi-hop queries across multiple documents simultaneously, breaking the single-document limitation.
-
-- **File Compatibility**: Supports both PDF and TXT file formats.
-
-- **LLM Model Compatibility**: Supports Google Gemini Pro, OpenAI GPT 3, Anthropic Claude, Llama2 and other open-source LLMs.
-
-
-![Demo 3: Chatbot Output](img/LLMAgents.jpg)
-
-
-## 🌟Requirements
-
-- **Python 3.9+** : Tested with recent Python 3.x versions.
-- **Streamlit** : Web UI framework for building interactive apps.
-- **LangChain** : For text splitting, RAG, vector stores, and LLM orchestration.
-- **langchain‑community** : Community integrations, including `ChatOllama` and `OllamaEmbeddings`.
-- **langchain‑text‑splitters** : Provides `RecursiveCharacterTextSplitter` used for chunking PDF text.
-- **PyPDF2** : To extract text content from PDF files.
-- **faiss‑cpu** : Vector database for efficient similarity search over PDF chunks.
-- **Ollama** (desktop/server) : Local LLM runtime; this project uses the `llama3.1:8b` model via Ollama.
-
-![Demo 4: Chatbot Output](img/CALMOutput.jpg)
----
-
-## ▶️Installation
-
-### 1. Create and activate a virtual environment (recommended)
+Navigate to your workspace and ensure your virtual environment is activated:
 
 ```bash
-cd Multi-PDFs_ChatApp_AI-Agent
-python3 -m venv .venv
+cd MultiPDF_RAG
+python -m venv .venv
+
+# On Linux/MacOS
 source .venv/bin/activate
+# On Windows
+.venv\Scripts\activate
 ```
 
-### 2. Install the required Python packages
+### 2. Dependency Installation
+
+Install the required Python modules from the bundled requirements file:
 
 ```bash
-pip install --upgrade pip
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Install and prepare Ollama (local LLM)
+### 3. Local LLM Configuration
 
-1. Install Ollama from the official website.
-2. Start the Ollama server:
+Ollama handles local model serving.
+1. Download and install Ollama from [ollama.com](https://ollama.com).
+2. Ensure the Ollama background service is running.
+3. Pull the required models:
 
-   ```bash
-   ollama serve
-   ```
+```bash
+ollama pull llama3.1:8b
+ollama pull qwen3-embedding:8b
+```
+*(Note: As seen in the source code, embeddings use qwen3-embedding:8b and the chat engine utilizes llama3.1:8b).*
 
-3. Download the model used by this app:
+### 4. Application Execution
 
-   ```bash
-   ollama pull llama3.1:8b
-   ```
-
-> 🔑 **Environment variables / .env**  
-> This version does **not** use the Google Gemini API, so `GOOGLE_API_KEY` and a `.env` file are **not required**.  
-> As long as Ollama is installed and running, the app will work without any additional API keys.
-
-### 4. Run the Streamlit app
+Launch the application locally with Streamlit:
 
 ```bash
 streamlit run chatapp.py
 ```
 
----
-## 💡Usage
+## Usage Instructions
 
-To use the Multi-PDF-s 📚ChatApp AI Agent 🤖, U can have glimpse of look by clicking on this link : [Launch App On Streamlit](https://multi-pdfschatappai-agent.streamlit.app/). To run app, fork app and follow the below steps to start using it. Use the sidebar to upload PDF files and train the chatbot. Once trained, you can have conversations with the chatbot by entering questions in the text input field.
+1. Upon running the application, your default web browser will open a local Streamlit session.
+2. Utilize the left sidebar to upload multiple PDF files.
+3. Press **Submit & Process** specifically dedicated to extracting and indexing the texts. Monitor the processing spinner.
+4. Once completed, leverage the text input at the center of the UI to pose questions regarding the uploaded material.
+5. Review the comprehensive answers dynamically generated by the local models.
 
-In case You want to run & implement project on your system then follow these steps:
+## License
 
-1. Ensure that you have installed the required dependencies via `pip install -r requirements.txt` and that **Ollama is running with the `llama3.1:8b` model pulled**.
-2. Run the `chatapp.py` file using the Streamlit CLI. Execute the following command:
-   ```bash
-   streamlit run chatapp.py
-   ```
-3. The application will launch in your default web browser, displaying the user interface.
-4. Upload multiple PDF documents into the app by following the provided instructions at sidebar. On the sidebar, you'll find an option to upload PDF documents. Click on the "Upload your documents here and click on Process" button and select one or more PDF files. 
-5. Don't forget to click on Submit & Process Button.
-6. Ask questions in natural language about the loaded PDFs using the chat interface.
-7. Chatting with the Documents: After uploading and processing the PDF documents, you can ask questions by typing them in the text input field. Press Enter or click the "Ask" button to submit your question.
-
-The application will use conversational AI to provide responses based on the content of the uploaded documents. The responses will be displayed in the chat interface.
-
----
-## ©️ License 🪪 
-
-This project is distributed under the MIT License. See `LICENSE` for more information.
+This source code is distributed under the MIT License. See `LICENSE` for more information.
