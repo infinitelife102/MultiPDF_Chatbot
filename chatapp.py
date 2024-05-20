@@ -21,7 +21,7 @@ def get_pdf_text(pdf_docs):
 def get_text_chunks(text):
     # Use smaller chunks to stay within the LLM/embedding context window
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=20000,      # max characters per chunk
+        chunk_size=5000,      # max characters per chunk
         chunk_overlap=1000,    # overlap for better context continuity
     )
     chunks = text_splitter.split_text(text)
@@ -29,7 +29,7 @@ def get_text_chunks(text):
 
 
 def get_vector_store(text_chunks):
-    embeddings = OllamaEmbeddings(model="qwen3-embedding:8b")
+    embeddings = OllamaEmbeddings(model="qwen3-embedding")
     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
     vector_store.save_local("faiss_index")
 
@@ -54,7 +54,7 @@ def get_conversational_chain():
 
 
 def user_input(user_question):
-    embeddings = OllamaEmbeddings(model="qwen3-embedding:8b")
+    embeddings = OllamaEmbeddings(model="qwen3-embedding")
     new_db = FAISS.load_local(
         "faiss_index",
         embeddings,
@@ -76,7 +76,7 @@ def user_input(user_question):
 
 
 def main():
-    st.set_page_config("Multi PDF Chatbot", page_icon = ":scroll:")
+    st.set_page_config(page_title="Multi PDF Chatbot", page_icon=":scroll:")
     st.header("Multi-PDF's - RAG")
 
     user_question = st.text_input("Ask a Question from the PDF Files uploaded...")
@@ -92,6 +92,9 @@ def main():
         st.title("📁 PDF File's Section")
         pdf_docs = st.file_uploader("Upload your PDF Files & \n Click on the Submit & Process Button ", accept_multiple_files=True)
         if st.button("Submit & Process"):
+            if not pdf_docs:
+                st.warning("Please upload at least one PDF file.")
+                return
             with st.spinner("Processing..."): # user friendly message.
                 raw_text = get_pdf_text(pdf_docs) # get the pdf text
                 text_chunks = get_text_chunks(raw_text) # get the text chunks

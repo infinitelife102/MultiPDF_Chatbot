@@ -42,7 +42,7 @@ Navigate to your workspace and ensure your virtual environment is activated:
 
 ```bash
 cd MultiPDF_RAG
-python -m venv .venv
+python3 -m venv .venv
 
 # On Linux/MacOS
 source .venv/bin/activate
@@ -55,8 +55,8 @@ source .venv/bin/activate
 Install the required Python modules from the bundled requirements file:
 
 ```bash
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
 ```
 
 ### 3. Local LLM Configuration
@@ -68,7 +68,7 @@ Ollama handles local model serving.
 
 ```bash
 ollama pull llama3.1:8b
-ollama pull qwen3-embedding:8b
+ollama pull qwen3-embedding
 ```
 *(Note: As seen in the source code, embeddings use qwen3-embedding:8b and the chat engine utilizes llama3.1:8b).*
 
@@ -77,7 +77,7 @@ ollama pull qwen3-embedding:8b
 Launch the application locally with Streamlit:
 
 ```bash
-streamlit run chatapp.py
+python3 -m streamlit run chatapp.py
 ```
 
 ## Usage Instructions
