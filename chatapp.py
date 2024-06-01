@@ -76,8 +76,8 @@ def user_input(user_question):
 
 
 def main():
-    st.set_page_config(page_title="Multi PDF Chatbot", page_icon=":scroll:")
-    st.header("Multi-PDF's - RAG")
+    st.set_page_config(page_title="Multi-PDF Chatbot", page_icon=":scroll:")
+    st.header("Multi-PDF Chatbot (RAG-based)")
 
     user_question = st.text_input("Ask a Question from the PDF Files uploaded...")
 
@@ -103,13 +103,13 @@ def main():
         
         st.write("---")
         st.image("img/gkj.jpg")
-        st.write("PDF Chat Application")
+        st.write("Multi-PDF Chatbot")
 
 
     st.markdown(
         """
         <div style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #0E1117; padding: 15px; text-align: center;">
-            PDF Chat Application
+            Multi-PDF Chatbot
         </div>
         """,
         unsafe_allow_html=True

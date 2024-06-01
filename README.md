@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 MultiPDF RAG
+# 🧠 Multi-PDF Chatbot (RAG-based)
 ### *Chat with Any PDF Document — Privately, Locally, Intelligently*
 
 <br/>
@@ -20,9 +20,9 @@
 
 ---
 
-## 🎯 What is MultiPDF RAG?
+## 🎯 What is Multi-PDF Chatbot?
 
-**MultiPDF RAG** is a production-grade intelligent document assistant built on **Retrieval-Augmented Generation (RAG)** architecture. It enables natural language conversations across multiple PDF documents simultaneously — all running **locally on your machine** with zero cloud dependency, zero data leakage.
+**Multi-PDF Chatbot** is a production-grade intelligent document assistant built on **Retrieval-Augmented Generation (RAG)** architecture. It enables natural language conversations across multiple PDF documents simultaneously — all running **locally on your machine** with zero cloud dependency, zero data leakage.
 
 Whether you're analyzing research papers, legal contracts, financial reports, or technical manuals — this system extracts knowledge and answers your questions with precision using state-of-the-art local LLMs.
 
